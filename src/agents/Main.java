@@ -15,15 +15,22 @@ public class Main {
 		config.setParameter("gui", "true");
 		AgentContainer mc = runtime.createMainContainer(config);
 		AgentController ac1;
-		AgentController ac2;
+		AgentController pd1;
+		AgentController pd2;
 		AgentController ac3;
 		try {
+			long startTime = System.nanoTime();
 			ac1 = mc.createNewAgent("MarketplaceAgent", MarketplaceAgent.class.getName(), null);
-			ac2 = mc.createNewAgent("ProducerAgent", ProducerAgent.class.getName(), null);
+			pd1 = mc.createNewAgent("ProducerAgent1", ProducerAgent.class.getName(), null);
+			pd2 = mc.createNewAgent("ProducerAgent2", ProducerAgent.class.getName(), null);
 			ac3 = mc.createNewAgent("ConsumerAgent", ConsumerAgent.class.getName(), null);
 			ac1.start();
-			ac2.start();
+			pd1.start();
+			pd2.start();
 			ac3.start();
+			 long endTime = System.nanoTime();
+		        long duration = (endTime - startTime) / 1000000;  // Convertir en millisecondes
+		        System.out.println("exécution time: " + duration + " ms");
 		} catch (StaleProxyException e) {
 		}
 	}

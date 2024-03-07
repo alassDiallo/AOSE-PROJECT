@@ -3,6 +3,10 @@ package agents;
 import java.util.Map;
 import java.util.Set;
 
+import CustumerBehaviors.EnergyBooking;
+import CustumerBehaviors.Energy_Request;
+import CustumerBehaviors.Evaluate_offers;
+import CustumerBehaviors.Offer_Selection;
 import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.CyclicBehaviour;
@@ -18,40 +22,23 @@ public class ConsumerAgent extends Agent {
 	private static final String BEHAVIOR_ENERGYBOOKING="energyBooking";
 	private static final String BEHAVIOR_EVALUATEOFFER="evaluateOffer";
 	private static final String BEHAVIOUR_FIN="fin";
-	//private Map<String,String> pref;
-	//private Places[] places;
-	//private Set<Places> placesfound;
 	
 	public static AID IDENTIFIANT = new AID("ConsumerAgent", AID.ISLOCALNAME);
 	
     protected void setup() {
     	FSMBehaviour behaviour = new FSMBehaviour(this);
-    	/*behaviour.registerFirstState(new GetRequestUser(this), BEHAVIOR_GETREQUEST);
-		behaviour.registerState(new InitialiseData(this), BEHAVIOUR_INITIALISATION);
-		behaviour.registerState(new SearchPlace(this), BEHAVIOR_SEARCH);
-		behaviour.registerLastState(new RespondAgent(this), BEHAVIOR_RESPOND);
-		behaviour.registerTransition(BEHAVIOR_GETREQUEST,BEHAVIOR_GETREQUEST,0);
-		behaviour.registerTransition(BEHAVIOR_GETREQUEST,BEHAVIOUR_INITIALISATION,1);
-		behaviour.registerDefaultTransition(BEHAVIOUR_INITIALISATION,BEHAVIOR_SEARCH);
-		behaviour.registerDefaultTransition(BEHAVIOR_SEARCH,BEHAVIOR_RESPOND);
-		addBehaviour(behaviour);*/
+    	behaviour.registerFirstState(new Energy_Request(this), BEHAVIOR_REQUESTENERGY);
+		behaviour.registerState(new Offer_Selection(this), BEHAVIOUR_SELECTIONOFFER);
+		behaviour.registerState(new Evaluate_offers(this), BEHAVIOR_EVALUATEOFFER);
+		behaviour.registerLastState(new EnergyBooking(this), BEHAVIOR_ENERGYBOOKING);
+		//behaviour.registerTransition(BEHAVIOR_GETREQUEST,BEHAVIOR_GETREQUEST,0);
+		//behaviour.registerTransition(BEHAVIOR_GETREQUEST,BEHAVIOUR_INITIALISATION,1);
+		behaviour.registerDefaultTransition(BEHAVIOR_REQUESTENERGY,BEHAVIOUR_SELECTIONOFFER);
+		behaviour.registerDefaultTransition(BEHAVIOUR_SELECTIONOFFER,BEHAVIOR_EVALUATEOFFER);
+		behaviour.registerDefaultTransition(BEHAVIOR_EVALUATEOFFER,BEHAVIOR_ENERGYBOOKING);
+		addBehaviour(behaviour);
     }
 
-    private class RequestEnergyBehaviour extends CyclicBehaviour {
-        public void action() {
-            ACLMessage msg = new ACLMessage(ACLMessage.CFP);
-            msg.setContent("Requesting energy");
-            msg.addReceiver(getAID("MarketplaceAgent"));
-            send(msg);
-
-            MessageTemplate mt = MessageTemplate.MatchPerformative(ACLMessage.PROPOSE);
-            ACLMessage reply = receive(mt);
-            if (reply != null) {
-            	System.out.println(reply);
-                // Evaluate offers and book energy consumption
-            } else {
-                block();
-            }
-        }
-    }
+   
+    
 }
