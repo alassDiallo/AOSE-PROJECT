@@ -1,5 +1,6 @@
 package market_manager;
 
+import agents.ConsumerAgent;
 import agents.MarketplaceAgent;
 import jade.core.behaviours.OneShotBehaviour;
 import jade.lang.acl.ACLMessage;
@@ -20,14 +21,21 @@ public class Booking_Arbitration extends OneShotBehaviour {
 		MessageTemplate mr = MessageTemplate.MatchPerformative(ACLMessage.REJECT_PROPOSAL);
         ACLMessage messa = mpa.receive(ma);
         ACLMessage messr = mpa.receive(mr);
+        ACLMessage message = new ACLMessage(ACLMessage.INFORM);
+		
         if( messa != null) {
         	System.out.println(messa);
-        	System.out.println("accepter");
+        	message.setContent("Booking success");
+        	System.out.println("Booking success");
         }
         if (messr != null) {
         	 System.out.println(messr);
-     		System.out.println("booking arbitrairarie");
+        	 message.setContent("Booking fail");
+     		System.out.println("booking fail");
         }
+        
+        message.addReceiver(ConsumerAgent.IDENTIFIANT);
+		mpa.send(message);
        
        
 		
