@@ -22,11 +22,11 @@ public class Main {
 			long startTime = System.nanoTime();
 			ac1 = mc.createNewAgent("MarketplaceAgent", MarketplaceAgent.class.getName(), null);
 			pd1 = mc.createNewAgent("ProducerAgent1", ProducerAgent.class.getName(), null);
-			pd2 = mc.createNewAgent("ProducerAgent2", ProducerAgent.class.getName(), null);
+			//pd2 = mc.createNewAgent("ProducerAgent2", ProducerAgent.class.getName(), null);
 			ac3 = mc.createNewAgent("ConsumerAgent", ConsumerAgent.class.getName(), null);
 			ac1.start();
 			pd1.start();
-			pd2.start();
+			//pd2.start();
 			ac3.start();
 			 long endTime = System.nanoTime();
 		        long duration = (endTime - startTime) / 1000000;  // Convertir en millisecondes

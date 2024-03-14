@@ -1,5 +1,7 @@
 package agents;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -13,6 +15,7 @@ import jade.core.behaviours.CyclicBehaviour;
 import jade.core.behaviours.FSMBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
+import offers.Offers;
 
 public class ConsumerAgent extends Agent {
 	
@@ -22,7 +25,7 @@ public class ConsumerAgent extends Agent {
 	private static final String BEHAVIOR_ENERGYBOOKING="energyBooking";
 	private static final String BEHAVIOR_EVALUATEOFFER="evaluateOffer";
 	private static final String BEHAVIOUR_FIN="fin";
-	
+	List<Offers> offers = new ArrayList<>();
 	public static AID IDENTIFIANT = new AID("ConsumerAgent", AID.ISLOCALNAME);
 	
     protected void setup() {
@@ -37,6 +40,19 @@ public class ConsumerAgent extends Agent {
 		behaviour.registerDefaultTransition(BEHAVIOUR_SELECTIONOFFER,BEHAVIOR_EVALUATEOFFER);
 		behaviour.registerDefaultTransition(BEHAVIOR_EVALUATEOFFER,BEHAVIOR_ENERGYBOOKING);
 		addBehaviour(behaviour);
+    }
+    
+    /*public List<Offers> getReceivedOffers() {
+    	return this.offers ;
+    	
+    }*/
+    public List<Offers> getReceivedOffers() {
+        return new ArrayList<>(this.offers); // Retourne une copie pour éviter la modification extérieure
+    }
+
+    public void addOffer(Offers offer) {
+    	System.out.println("ajout de l'offre "+offer);
+        this.offers.add(offer);
     }
 
    

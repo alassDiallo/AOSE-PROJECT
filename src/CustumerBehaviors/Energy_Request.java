@@ -18,8 +18,6 @@ public class Energy_Request extends OneShotBehaviour {
 		message.setContent("can u please share me the list of available energy");
 		message.addReceiver(MarketplaceAgent.IDENTIFIANT);
 		ca.send(message);
-		
-		
 	}
 	
 	

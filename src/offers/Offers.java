@@ -13,9 +13,50 @@ public class Offers {
 		this.agentID = agent; 
 	}
 
+	
+	public double getPrice() {
+		return price;
+	}
+
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+
+	public boolean isRenewable() {
+		return renewable;
+	}
+
+
+	public void setRenewable(boolean renewable) {
+		this.renewable = renewable;
+	}
+
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+
+	public String getAgentID() {
+		return agentID;
+	}
+
+
+	public void setAgentID(String agentID) {
+		this.agentID = agentID;
+	}
+
+
 	@Override
 	public String toString() {
-		return "Offers [price=" + price + ", renewable=" + renewable + ", quantity=" + quantity + ", agentID=" + agentID + "]";
+		return "price=" + price + ", renewable=" + renewable + ", quantity=" + quantity + ", agentID=" + agentID;
 	}
 	
 	

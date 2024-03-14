@@ -18,6 +18,7 @@ public class ProducerAgent extends Agent {
 	public double selling_price;
 	public int quantity;
 	public boolean renewable;
+	public boolean free=true;
 	private static final String BEHAVIOUR_DEBUT="debut";
 	private static final String BEHAVIOUR_BOOKINGCONFIRMATION="bookingConf";
 	private static final String BEHAVIOR_DETERMINIGENERGIE="determiningEnergy";
@@ -49,6 +50,7 @@ public class ProducerAgent extends Agent {
     	int t = rd.nextInt(2);
     	this.renewable = t==1?true:false;
     	this.quantity = 1 + rd.nextInt(5000);
+    	this.free=false;
     	this.selling_price = 1 + Double.parseDouble(df.format(rd.nextDouble()*1000000).replace(",", "."));
     	System.out.println(this);
     }

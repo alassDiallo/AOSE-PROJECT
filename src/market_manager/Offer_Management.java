@@ -14,24 +14,31 @@ public class Offer_Management extends OneShotBehaviour {
 	}
 	@Override
 	public void action() {
-		while(true) {
+		//while(true) {
+		System.out.println("offer manager");
 		mpa.doWait();
 		MessageTemplate template = MessageTemplate.MatchPerformative(ACLMessage.REQUEST);
         ACLMessage msg = mpa.receive(template);
+        System.out.println(msg);
         if(msg != null) {
         	System.out.println(msg);
-        	System.out.println("MarketManager receiver offer from Custumer  : "+msg.getContent());
+        	System.out.println("MarketManager receiver offer from Consumer  : "+msg.getContent());
         	ACLMessage reply = msg.createReply();
             //reply.setPerformative(ACLMessage.ACCEPT_PROPOSAL);
             //reply.setContent("Booking confirmed");
+        	String content = mpa.convertirListeEnString();
+        	System.out.println("----------------------------------");
+        	System.out.println(content);
+        	System.out.println("----------------------------------");
         	reply.setPerformative(ACLMessage.INFORM);
-            reply.setContent("list of offers");
+            reply.setContent(content);
+            mpa.send(reply);
         }
-        else {
-        	block();
-        }
+        //else {
+        	//block();
+        //}
 		
-	}
+	//}
 	}
 
 }

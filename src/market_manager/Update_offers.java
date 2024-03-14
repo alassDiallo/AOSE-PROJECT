@@ -13,7 +13,7 @@ public class Update_offers extends OneShotBehaviour {
 	}
 	@Override
 	public void action() {
-		while (true){
+		//while (true){
 		this.mpa.doWait();
 		MessageTemplate template = MessageTemplate.MatchPerformative(ACLMessage.INFORM);
         ACLMessage msg = mpa.receive(template);
@@ -26,11 +26,11 @@ public class Update_offers extends OneShotBehaviour {
             //reply.setPerformative(ACLMessage.ACCEPT_PROPOSAL);
             //reply.setContent("Booking confirmed");
         }
-        else {
-        	block();
-        }
+        //else {
+        	//block();
+        //}
 	}
-	}
+	//}
 	
 	
 

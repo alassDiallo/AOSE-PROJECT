@@ -2,6 +2,8 @@ package market_manager;
 
 import agents.MarketplaceAgent;
 import jade.core.behaviours.OneShotBehaviour;
+import jade.lang.acl.ACLMessage;
+import jade.lang.acl.MessageTemplate;
 
 public class Booking_Arbitration extends OneShotBehaviour {
 	MarketplaceAgent mpa;
@@ -13,12 +15,22 @@ public class Booking_Arbitration extends OneShotBehaviour {
 
 	@Override
 	public void action() {
-		System.out.println("booking arbitrairarie");
+		mpa.doWait();
+		MessageTemplate ma = MessageTemplate.MatchPerformative(ACLMessage.ACCEPT_PROPOSAL);
+		MessageTemplate mr = MessageTemplate.MatchPerformative(ACLMessage.REJECT_PROPOSAL);
+        ACLMessage messa = mpa.receive(ma);
+        ACLMessage messr = mpa.receive(mr);
+        if( messa != null) {
+        	System.out.println(messa);
+        	System.out.println("accepter");
+        }
+        if (messr != null) {
+        	 System.out.println(messr);
+     		System.out.println("booking arbitrairarie");
+        }
+       
+       
 		
-	}
-	
-	public int onEnd() {
-		return 1;
 	}
 	
 	

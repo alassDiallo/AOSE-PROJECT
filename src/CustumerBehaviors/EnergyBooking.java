@@ -2,6 +2,8 @@ package CustumerBehaviors;
 
 import agents.ConsumerAgent;
 import jade.core.behaviours.OneShotBehaviour;
+import jade.lang.acl.ACLMessage;
+import jade.lang.acl.MessageTemplate;
 
 public class EnergyBooking extends OneShotBehaviour {
 	
@@ -13,7 +15,10 @@ public class EnergyBooking extends OneShotBehaviour {
 
 	@Override
 	public void action() {
-		// TODO Auto-generated method stub
+		ca.doWait();
+		MessageTemplate mt = MessageTemplate.MatchPerformative(ACLMessage.INFORM);
+        ACLMessage message = ca.receive(mt);
+        System.out.println(message);
 		System.out.println("energy booking");
 		
 	}

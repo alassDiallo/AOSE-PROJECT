@@ -61,5 +61,22 @@ public class MarketplaceAgent extends Agent {
     }
     
 
+    public String convertirListeEnString() {
+		//String resultat = convertirListeEnString(listeObjets);
+	
+	    // Affichage du résultat
+	    StringBuilder sb = new StringBuilder();
+	    for (Offers objet : this.offers) {
+	        sb.append(objet.toString()); // Ajouter la représentation textuelle de l'objet à la chaîne
+	        sb.append("; "); // Ajouter une virgule pour séparer les éléments (optionnel)
+	    }
+	    // Supprimer la dernière virgule et l'espace après le dernier élément (si nécessaire)
+	    if (sb.length() > 0) {
+	        sb.delete(sb.length() - 2, sb.length());
+	    }
+	    return sb.toString();
+	}
+    
+
   
 }
